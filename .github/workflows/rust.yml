@@ -10,9 +10,21 @@ env:
   CARGO_TERM_COLOR: always
 
 jobs:
-  build:
+  build-todo-api:
 
     runs-on: ubuntu-latest
+    working-directory: ./todo_api
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build
+      run: cargo build --verbose
+    - name: Clippy
+      run: cargo clippy -- --deny clippy::all
+  build-todo-web:
+
+    runs-on: ubuntu-latest
+    working-directory: ./todo_web
 
     steps:
     - uses: actions/checkout@v4
